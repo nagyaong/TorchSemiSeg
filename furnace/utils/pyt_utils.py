@@ -126,30 +126,32 @@ def load_dualpath_model(model, model_file, is_restore=False):
     return model
 
 def parse_devices(input_devices):
-    if input_devices.endswith('*'):
-        devices = list(range(torch.cuda.device_count()))
-        return devices
+    return [input_devices]
+    # # print(input_devices)
+    # if input_devices.endswith('*'):
+    #     devices = list(range(torch.cuda.device_count()))
+    #     return devices
 
-    devices = []
-    for d in input_devices.split(','):
-        if '-' in d:
-            start_device, end_device = d.split('-')[0], d.split('-')[1]
-            assert start_device != ''
-            assert end_device != ''
-            start_device, end_device = int(start_device), int(end_device)
-            assert start_device < end_device
-            assert end_device < torch.cuda.device_count()
-            for sd in range(start_device, end_device + 1):
-                devices.append(sd)
-        else:
-            device = int(d)
-            assert device < torch.cuda.device_count()
-            devices.append(device)
+    # devices = []
+    # for d in input_devices.split(','):
+    #     if '-' in d:
+    #         start_device, end_device = d.split('-')[0], d.split('-')[1]
+    #         assert start_device != ''
+    #         assert end_device != ''
+    #         start_device, end_device = int(start_device), int(end_device)
+    #         assert start_device < end_device
+    #         assert end_device < torch.cuda.device_count()
+    #         for sd in range(start_device, end_device + 1):
+    #             devices.append(sd)
+    #     else:
+    #         device = int(d)
+    #         assert device < torch.cuda.device_count()
+    #         devices.append(device)
 
-    logger.info('using devices {}'.format(
-        ', '.join([str(d) for d in devices])))
+    # logger.info('using devices {}'.format(
+    #     ', '.join([str(d) for d in devices])))
 
-    return devices
+    # return devices
 
 
 def extant_file(x):

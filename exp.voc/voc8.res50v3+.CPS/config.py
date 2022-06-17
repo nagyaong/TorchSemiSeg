@@ -49,10 +49,10 @@ C.val_log_file = C.log_dir + '/val_' + exp_time + '.log'
 C.link_val_log_file = C.log_dir + '/val_last.log'
 
 """ Data Dir and Weight Dir """
-C.dataset_path = osp.join(C.volna, 'DATA/pascal_voc')
-C.img_root_folder = C.dataset_path
-C.gt_root_folder = C.dataset_path
-C.pretrained_model = C.volna + 'DATA/pytorch-weight/resnet50_v1c.pth'
+C.dataset_path = osp.join(C.volna, 'data/final_data/train')
+C.img_root_folder = osp.join(C.dataset_path,'labeled_images')
+C.gt_root_folder = osp.join(C.dataset_path,'labels')
+C.pretrained_model = C.volna + 'pytorch-weight/resnet50_v1c.pth'
 
 """ Path Config """
 def add_path(path):
@@ -62,9 +62,9 @@ add_path(osp.join(C.root_dir, 'furnace'))
 
 ''' Experiments Setting '''
 C.labeled_ratio = 8     # ratio of labeled set
-C.train_source = osp.join(C.dataset_path, "subset_train_aug/train_aug_labeled_1-{}.txt".format(C.labeled_ratio))
-C.unsup_source = osp.join(C.dataset_path, "subset_train_aug/train_aug_unlabeled_1-{}.txt".format(C.labeled_ratio))
-C.eval_source = osp.join(C.dataset_path, "val.txt")
+C.train_source = osp.join(C.dataset_path, "labeled_images.txt")
+C.unsup_source = osp.join(C.dataset_path, "unlabeled_images.txt")
+C.eval_source = osp.join(C.dataset_path, "vallabeled_images.txt")
 C.is_test = False
 C.fix_bias = True
 C.bn_eps = 1e-5
@@ -80,9 +80,9 @@ C.image_mean = np.array([0.485, 0.456, 0.406])  # 0.485, 0.456, 0.406
 C.image_std = np.array([0.229, 0.224, 0.225])
 C.image_height = 512
 C.image_width = 512
-C.num_train_imgs = 10582 // C.labeled_ratio
-C.num_eval_imgs = 1449
-C.num_unsup_imgs = 10582 - C.num_train_imgs     # unsupervised samples
+C.num_train_imgs = 108
+C.num_eval_imgs = 27
+C.num_unsup_imgs = 1565    # unsupervised samples
 
 """Train Config"""
 if os.getenv('learning_rate'):

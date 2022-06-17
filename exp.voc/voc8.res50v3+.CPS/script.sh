@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 nvidia-smi
 
-export volna="path to your data dir"
-export NGPUS=4
-export OUTPUT_PATH="path to your output dir"
-export snapshot_dir=$OUTPUT_PATH/snapshot
+export volna="../../DATA"
+export NGPUS=1
+export OUTPUT_PATH="../../output"
+export snapshot_dir=$OUTPUT_PATH
 
 export batch_size=8
 export learning_rate=0.0025
